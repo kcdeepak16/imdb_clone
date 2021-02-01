@@ -58,7 +58,7 @@ ROOT_URLCONF = 'imdb_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [(os.path.join("templates"))],
+        'DIRS': [(os.path.abspath.join("templates"))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
