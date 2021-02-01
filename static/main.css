@@ -1,0 +1,160 @@
+
+.light_mode
+{
+  background-color: white !important;
+  color: black !important; 
+}
+#header_row
+{
+  position: relative;
+}
+.movie_contents, .main_content, .content_container
+{
+	height: 80vh;
+	width: 100%;
+  position: relative;
+}
+.movie_contents ul, .main_img_container, .main_content_container
+{
+	list-style: none;
+	position: absolute;
+	top: 50%;
+	left: 5%;
+	margin-left: 2rem;
+	transform: translate(-5%,-50%);
+}
+.main_content_container
+{
+	margin: 0;
+}
+.img_container
+{
+	display: inline-block;
+	position: relative;
+	height: 45rem;
+}
+.img_container
+{
+	margin: 0;
+}
+.movie_contents ul li
+{
+	margin: .5rem 0;
+} 
+.movie_contents ul li img
+{
+	width: 4rem;
+	height: 5rem;
+	display: inline-block;
+	border-radius: 5px;
+	box-shadow: 0px 0px 40px rgb(0, 0, 0);
+}
+.light_box_shadow1
+{
+  box-shadow: 0px 0px 40px rgb(0, 0, 0, .4) !important;
+}
+.movie_contents ul li p, #search_results ul li h3
+{
+	font-size: 1.2rem;
+	display: inline-block;
+	line-height: 5rem;
+	margin-left: 1.5rem;
+}
+.img_container img
+{
+	display: none;
+	height: 100%;
+	width: 33rem;
+	border-radius: 2rem;
+	box-shadow: 0px 20px 40px rgb(0, 0, 0);
+}
+.light_box_shadow2
+{
+  box-shadow: 0px 20px 40px rgb(0, 0, 0,.4) !important;
+}
+.img_container img:nth-child(1)
+{
+	display: block;
+}
+.content h4, .content h5
+{
+	color: gray;
+}
+.content
+{
+	display: none;
+}
+.content:nth-child(1)
+{
+	display: block;
+}
+.content p img
+{
+	height: 4rem;
+	width: auto;
+	margin-right: 2rem;
+}
+.content p
+{
+	line-height: 4rem;
+}
+.content a:hover
+{
+  text-decoration: none;
+}
+.content a:hover ~ .content h3
+{
+  text-decoration: underline;
+}
+.fadedown
+{
+	animation: fadeInDown .5s;
+}
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: none;
+    }
+}
+@media only screen and (max-width: 375px)
+{
+    html
+    {
+        font-size: 35% !important;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 45% !important;
+  }
+  .movie_contents ul li p
+  {
+  	display: none;
+  }
+  .movie_contents, .main_content
+  {
+  	height: 50vh;
+  }
+  .movie_contents ul
+  {
+  	top: 80% !important;
+  }
+  .movie_contents ul li
+  {
+    margin: 1rem;
+  }
+  .content_container
+  {
+  	height: 30vh;
+  	text-align: center;
+  }
+  .main_img_container
+  {
+    top: 50%;
+  }
+}
+

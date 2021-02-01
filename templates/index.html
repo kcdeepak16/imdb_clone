@@ -1,0 +1,204 @@
+{% extends 'navbar.html' %}
+{% load static 	%}
+{% block extra_head %}
+	<link href = "{% static 'main.css' %}" rel = "stylesheet" type = "text/css">
+{% endblock %}
+{% block rest_container %}
+	<div class = "row" id = "header_row">
+		<div class = "col-12" style = "text-align: center; padding: 1rem 3rem 0 3rem;">
+			<h2 style = "text-align:center;" class = "col-12">Popular English Movies</h2>
+			<p>Hover over or click on the cards in the left sidebar to read more about the movie</p>
+		</div>
+		<div class = "col-md-3 col-2 movie_contents" id = "movie_contents1">
+			<ul>
+				{% for movie in popular_movies %}
+				<li>
+					<img src = "{{movie.image}}">
+					<p>{{movie.title}}</p>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class = "col-md-4 offset-md-0 col-6 offset-1 main_content" id = "main_content1">
+			<div class = "main_img_container">
+				<div id = "img_container1" class = "img_container">
+					{% for movie in popular_movies %}
+						<img src = "{{movie.image}}">
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-5 offset-md-0 col-8 offset-3 content_container" id = "content_container1">
+			<div class = "main_content_container" id = "main_content_container1">
+				{% for movie in popular_movies %}
+					<div class = "content content1">
+						<a href = "{% url 'mainapp:movie' id=movie.id %}">
+						<h3>{{movie.title}}</h3>
+						<h4>{{movie.genre}}</h4>
+						<p><img src="https://img.icons8.com/color/48/000000/imdb.png"/>{{movie.rating}}</p>
+						<h5>
+							{{movie.overview}}
+						</h5>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class = "row">
+		<div class = "col-12" style = "text-align: center; padding: 1rem 3rem 0 3rem;">
+			<h2 style = "text-align:center;" class = "col-12">Highest Rated Hindi Movies</h2>
+			<p>Hover over or click on the cards in the left sidebar to read more about the movie</p>
+		</div>
+		<div class = "col-md-3 col-2 movie_contents" id = "movie_contents3">
+			<ul>
+				{% for movie in hindi_movies %}
+				<li>
+					<img src = "{{movie.image}}">
+					<p>{{movie.title}}</p>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class = "col-md-4 offset-md-0 col-6 offset-1 main_content" id = "main_content3">
+			<div class = "main_img_container">
+				<div id = "img_container3" class = "img_container">
+					{% for movie in hindi_movies %}
+						<img src = "{{movie.image}}">
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-5 offset-md-0 col-8 offset-3 content_container" id = "content_container3">
+			<div class = "main_content_container" id = "main_content_container3">
+				{% for movie in hindi_movies %}
+					<div class = "content content3">
+						<a href = "{% url 'mainapp:movie' id=movie.id %}">
+						<h3>{{movie.title}}</h3>
+						<h4>{{movie.genre}}</h4>
+						<p><img src="https://img.icons8.com/color/48/000000/imdb.png"/>{{movie.rating}}</p>
+						<h5>
+							{{movie.overview}}
+						</h5>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<div class = "row">
+		<div class = "col-12" style = "text-align: center; padding: 1rem 3rem 0 3rem;">
+			<h2 style = "text-align:center;" class = "col-12">Now Playing</h2>
+			<p>Hover over or click on the cards in the left sidebar to read more about the movie</p>
+		</div>
+		<div class = "col-md-3 col-2  movie_contents" id = "movie_contents2">
+			<ul>
+				{% for movie in playing_now %}
+				<li>
+					<img src = "{{movie.image}}">
+					<p>{{movie.title}}</p>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class = "col-md-4 offset-md-0 col-6 offset-1 main_content" id = "main_content2">
+			<div class = "main_img_container">
+				<div class = "img_container" id = "img_container2">
+					{% for movie in playing_now %}
+						<img src = "{{movie.image}}">
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class = "col-md-5 offset-md-0 col-8 offset-3 content_container" id = "content_container2">
+			<div class = "main_content_container" id = "main_content_container2">
+				{% for movie in playing_now %}
+					<div class = "content content2">
+						<a href = "{% url 'mainapp:movie' id=movie.id %}">
+						<h3>{{movie.title}}</h3>
+						<h4>{{movie.genre}}</h4>
+						<p><img src="https://img.icons8.com/color/48/000000/imdb.png"/>{{movie.rating}}</p>
+						<h5>
+							{{movie.overview}}
+						</h5>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<script>
+	$("#movie_contents1 ul li").mouseover(function (){
+			var i;
+			for(i=1;i<11;i++)
+			{
+		    	if($("#movie_contents1 ul").find("li:nth-child("+i+"):hover").length != 0)
+		    	{
+		    		var x = $("#img_container1 img:nth-child("+i+")");
+		    		var y = $(".content1:nth-child("+i+")");
+		    		x.addClass("fadedown");
+		    		y.addClass("fadedown")
+		    		x.show();
+		    		y.show()
+		    	}
+		    	else
+		    	{
+		   			var x = $("#img_container1 img:nth-child("+i+")");
+		   			var y = $(".content1:nth-child("+i+")");
+		   			x.removeClass("fadedown");
+		   			y.removeClass("fadedown");
+		   			y.hide();
+		   			x.hide();	
+		    	}
+			}
+		});
+	$("#movie_contents2 ul li").mouseover(function (){
+			var i;
+			for(i=1;i<11;i++)
+			{
+		    	if($("#movie_contents2 ul").find("li:nth-child("+i+"):hover").length != 0)
+		    	{
+		    		var x = $("#img_container2 img:nth-child("+i+")");
+		    		var y = $(".content2:nth-child("+i+")");
+		    		x.addClass("fadedown");
+		    		y.addClass("fadedown")
+		    		x.show();
+		    		y.show()
+		    	}
+		    	else
+		    	{
+		   			var x = $("#img_container2 img:nth-child("+i+")");
+		   			var y = $(".content2:nth-child("+i+")");
+		   			x.removeClass("fadedown");
+		   			y.removeClass("fadedown");
+		   			y.hide();
+		   			x.hide();	
+		    	}
+			}
+		});
+	$("#movie_contents3 ul li").mouseover(function (){
+			var i;
+			for(i=1;i<11;i++)
+			{
+		    	if($("#movie_contents3 ul").find("li:nth-child("+i+"):hover").length != 0)
+		    	{
+		    		var x = $("#img_container3 img:nth-child("+i+")");
+		    		var y = $(".content3:nth-child("+i+")");
+		    		x.addClass("fadedown");
+		    		y.addClass("fadedown")
+		    		x.show();
+		    		y.show()
+		    	}
+		    	else
+		    	{
+		   			var x = $("#img_container3 img:nth-child("+i+")");
+		   			var y = $(".content3:nth-child("+i+")");
+		   			x.removeClass("fadedown");
+		   			y.removeClass("fadedown");
+		   			y.hide();
+		   			x.hide();	
+		    	}
+			}
+		});
+		</script>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% load static %}
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link disabled = "true" id = "light_mode" href = "{% static 'light_mode.css' %}" rel = "stylesheet" type = "text/css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link href = "{% static 'navbar.css' %}" rel = "stylesheet" type = "text/css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        {% block extra_head %}
+        {% endblock %}
+	</head>
+	<body>	
+		<div class = "row" id = "header">
+			<navbar>
+				<a href = "{% url 'mainapp:main' %}">
+					<span id = "home_icon">
+	    				<svg viewBox="0 0 500 500">
+	      					<path d="M225,62a38,38 0 01 50,0l73,61v-59.6a10,10 0 01 10-10h59a10,10 0 01 10,10v125.6l68,56.5a10,10 0 01 0,13l-19.8,23.5a10,10 0 01-13,0l-212.2-177l-212.2,177a10,10 0 01-13,0l-19.8-23.5a10,10 0 01 0-13z" />
+	      					<path d="M250,132l177,146v149a20,20 0 01-20,20h-118v-118h-78v118h-118a20,20 0 01-20-20v-149z" />
+	    				</svg>
+	  				</span>
+  				</a>
+				<div id = "search_bar">
+					<form>
+						<input type = "search" onkeyup = "start_search()" placeholder="Search Movies" value = "">
+					</form>
+					<div id = "search_results">
+						<ul>
+						</ul>
+					</div>
+				</div>
+			</navbar>
+		</div>
+		{% block rest_container %}
+		{% endblock %}
+		<footer>
+			<div class="theme-switch-wrapper">
+    			<label class="theme-switch" for="mode_checkbox">
+        			<input type="checkbox" id="mode_checkbox"/>
+        			<div class="slider round"></div>
+  				</label>
+  				<em>Light Mode</em>
+			</div>
+			<p>Made By Deepak Karamchandani</p>
+			<div class = "soc">
+				<a href="https://github.com/kcdeepak16" class="icon github" title="GitHub">
+		    		<svg viewBox="71 71 370 370">
+		      			<path d="M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 127.1 176.4 9.3 1.7 12.3-4 12.3-8.9V389.4c-51.7 11.3-62.5-21.9-62.5-21.9 -8.4-21.5-20.6-27.2-20.6-27.2 -16.9-11.5 1.3-11.3 1.3-11.3 18.7 1.3 28.5 19.2 28.5 19.2 16.6 28.4 43.5 20.2 54.1 15.4 1.7-12 6.5-20.2 11.8-24.9 -41.3-4.7-84.7-20.6-84.7-91.9 0-20.3 7.3-36.9 19.2-49.9 -1.9-4.7-8.3-23.6 1.8-49.2 0 0 15.6-5 51.1 19.1 14.8-4.1 30.7-6.2 46.5-6.3 15.8 0.1 31.7 2.1 46.6 6.3 35.5-24 51.1-19.1 51.1-19.1 10.1 25.6 3.8 44.5 1.8 49.2 11.9 13 19.1 29.6 19.1 49.9 0 71.4-43.5 87.1-84.9 91.7 6.7 5.8 12.8 17.1 12.8 34.4 0 24.9 0 44.9 0 51 0 4.9 3 10.7 12.4 8.9 73.8-24.6 127-94.3 127-176.4C441.9 153.9 358.6 70.7 256 70.7z"/>
+		    		</svg>
+		  		</a>
+		  		<a href="https://www.linkedin.com/in/deepak-karamchandani-a86055162/" class="icon linkedin" title="LinkedIn">
+    				<svg viewBox="0 0 512 512">
+      					<path d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"/>
+   				 	</svg>
+  				</a>
+			</div>
+		</footer>
+		<script>
+		$(document).ready(function(){
+			document.documentElement.style.overflowX = 'hidden';
+		});
+		$(document).click(function(event) {
+			    if(!$(event.target).is('#search_bar input') && !$(event.target).is('#search_results')){
+			       	$("#search_results").slideUp();
+					setTimeout(function(){ $("#search_bar input").removeClass("search_results_on")}, 350);
+			       }
+			    });
+			function start_search()
+			{
+				var s = $("#search_bar input").val();
+				if(s.length%2 == 0 && s.length>0)
+				{
+					$("#search_bar input").addClass("search_results_on");
+					$("#search_results").slideDown();
+					$.ajax({
+			    		type: 'POST',
+					    url: '/search/',
+					    data: {
+					       'search':$("#search_bar input").val(),
+					    },
+					    dataType: 'json',
+					    success: function(data){
+					    	results = data['results'];
+					      	var p = $("#search_results ul");
+					      	p.empty();
+					      	var i;
+					      	for(i=0;i<5;i++)
+					      	{
+					      		var c = "<a href ='{{ request.scheme }}://{{ request.get_host }}/movie/"+results[i].id+"'><li><img src ="+results[i].image+"><div><h4>"+results[i].title+"</h4><p>"+results[i].genre+"</p></div></li></a>";
+					      		p.append(c);
+					      	}
+					   }
+					});
+				}
+			}
+			$("#mode_checkbox").click(function(){
+				if($(this).is(":checked"))
+				{
+					$("#light_mode").attr("disabled",false);
+				}
+				else
+				{
+					$("#light_mode").attr("disabled",true);	
+				}
+			});
+		</script>
+	</body>
+</html>

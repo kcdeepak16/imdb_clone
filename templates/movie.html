@@ -1,0 +1,120 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block extra_head %}
+	<link href = "{% static 'movie.css' %}" rel = "stylesheet" type="text/css">
+{% endblock %}
+{% block rest_container %}
+	<div class = "row" id = "backdrop_pic" style = "background-image: url('{{response.backdrop}}')">
+	</div>
+	<div class = "row" id = "header_container">
+		<div class = "col-md-3 col-4" id = "image_container">
+			<img src = "{{response.poster}}">
+		</div>
+		<div class = "col-md-9 col-8" id = "content_container">
+			<h2>{{response.title}} ({{response.year}})</h2>
+			<h4 style = "margin-top: 1rem;">{{response.runtime}} min | {{response.genres}}</h4>
+			<p><img src="https://img.icons8.com/color/48/000000/imdb.png"/>8.0</p>
+		</div>
+	</div>
+	<div class = "col-10 offset-1" id = "other_content">
+		<h3>Synopsis</h3>
+		<h4 style = "font-style: initial;">{{response.summary}}</h4>
+		<h3>Director</h3>
+		<h4>{{response.director}}</h4>
+		<h3>Cast</h3>
+		<div id = "cast_table">
+			<table id = "table">
+				<tr>
+					<th><h4>Picture</h4></th>
+					<th><h4>Name</h4></th>
+					<th><h4>Character</h4></th>
+				</tr>
+				{% for cast in response.casts %}
+				<tr>
+					<td class = "actor_picture">
+						<img src = "{{cast.image}}">
+					</td>
+					<td>
+						<p>{{cast.name}}</p>
+					</td>
+					<td>
+						<p>{{cast.character}}</p>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		<p id = "see_more" onclick = "expand_cast()" style = "float:right; text-decoration: underline;">See More</p>
+		<h3 style = "margin-top: 5rem;"> Similar Movies </h3>
+		<div id = "similar_movies">
+			<ul>
+				{% for movie in similar_movies%}
+				<a href = "{% url 'mainapp:movie' id=movie.id %}">
+					<li class = "row">
+						<div class = "col-md-2 col-4">
+							<img src = "{{movie.poster}}">
+						</div>
+						<div class = "col-md-4 col-8">
+							<h4>{{movie.title}} ({{movie.year}})</h4>
+							<h4>{{movie.genres}}</h4>
+						</div>
+					</li>
+				</a>
+				{% endfor %}
+			</ul>
+		</div>
+		<p id = "see_more2" onclick = "expand_cast2()" style = "float:right; text-decoration: underline;">See More</p>
+	</div>
+	<script>
+	$(document).ready(function(){
+		if($("#table").height()>600)
+		{
+			$("#cast_table").css({"height":"60rem", "overflow-y":"hidden"});
+			$("#see_more").css("display","block");
+		}
+		else
+		{
+			$("#see_more").css("display","none");
+		}
+		if($("#similar_movies").height()>600)
+		{
+			$("#similar_movies").css({"height":"60rem", "overflow-y":"hidden"});
+			$("#see_more2").css("display","block");
+		}
+		else
+		{
+			$("#see_more2").css("display","none");	
+		}
+	});
+	function expand_cast()
+	{
+		if($("#see_more").text() == "See More")
+		{
+			$("#cast_table").animate({"height":$("#table").css("height")},1000);
+			$("body").animate({scrollTop: $("#see_more").offset().top},1000);
+			$("#see_more").text("See Less");
+		}
+		else
+		{
+			$("#cast_table").animate({"height":"60rem"},1000);
+			$("body").animate({scrollTop: $("#cast_table").offset().top},1000);
+			$("#see_more").text("See More");	
+		}
+	}
+	function expand_cast2()
+	{
+		if($("#see_more2").text() == "See More")
+		{
+			$("#similar_movies").animate({"height":"130rem"},1000);
+			$("body").animate({scrollTop: $("#see_more2").offset().top},1000);
+			$("#see_more2").text("See Less");
+		}
+		else
+		{
+			$("#similar_movies").animate({"height":"60rem"},1000);
+			$("body").animate({scrollTop: $("#similar_movies").offset().top},1000);
+			$("#see_more2").text("See More");	
+		}
+	}
+	</script>
+{% endblock %}
