@@ -182,7 +182,7 @@ input::-ms-clear
   position: absolute;
   height: 65vh;
   background: #1f2029;
-  width: 80%;
+  width: 100%;
   margin-left: 2rem;
   border: solid 1px white;
   border-top: none;
